@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString()
 
             if (username == "user" && password == "1234") {
-                // Redirection vers HomeActivity
-                val intent = Intent(this, HomeActivity::class.java)
+                // Redirection vers AdminsActivity après une connexion réussie
+                val intent = Intent(this, AdminsActivity::class.java)
                 startActivity(intent)
                 finish() // Optionnel : termine l'activité actuelle pour éviter de revenir à l'écran de connexion
             } else {

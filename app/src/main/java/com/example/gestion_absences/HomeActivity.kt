@@ -16,6 +16,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var addButton: Button
     private lateinit var adapter: StudentAdapter
+    private var students: List<Student> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,11 @@ class HomeActivity : AppCompatActivity() {
         addButton = findViewById(R.id.addButton)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = StudentAdapter(listOf(), ::deleteStudent, ::editStudent)
+        adapter = StudentAdapter(students, { student ->
+            deleteStudent(student) // Supprimer l'étudiant
+        }, { student ->
+            navigateToUpdateStudent(student) // Naviguer pour mettre à jour l'étudiant
+        })
         recyclerView.adapter = adapter
 
         loadStudents()
@@ -41,24 +46,43 @@ class HomeActivity : AppCompatActivity() {
         service.getStudents().enqueue(object : Callback<List<Student>> {
             override fun onResponse(call: Call<List<Student>>, response: Response<List<Student>>) {
                 if (response.isSuccessful) {
-                    adapter.updateStudents(response.body() ?: listOf())
+                    students = response.body() ?: listOf()
+                    adapter.updateStudents(students)
                 }
             }
 
             override fun onFailure(call: Call<List<Student>>, t: Throwable) {
-                // Handle failure
+                Toast.makeText(this@HomeActivity, "Erreur de chargement", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
+    // Méthode pour supprimer un étudiant
     private fun deleteStudent(student: Student) {
-        // Votre code pour supprimer un étudiant
+        val service = ApiClient.getClient().create(StudentService::class.java)
+        service.deleteStudent(student.id.toString()).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@HomeActivity, "Étudiant supprimé", Toast.LENGTH_SHORT).show()
+                    // Mettre à jour la liste des étudiants après suppression
+                    students = students.filter { it.id != student.id }
+                    adapter.updateStudents(students)
+                } else {
+                    Toast.makeText(this@HomeActivity, "Erreur lors de la suppression", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@HomeActivity, "Échec de la connexion", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
-    private fun editStudent(student: Student) {
-        val intent = Intent(this, EditStudentActivity::class.java)
-        intent.putExtra("student_id", student.id)
-        startActivity(intent)
+    // Méthode pour naviguer vers l'écran de mise à jour d'un étudiant
+    private fun navigateToUpdateStudent(student: Student) {
+        val intent = Intent(this, UpdateStudentActivity::class.java)
+        intent.putExtra("student", student)
+        startActivityForResult(intent, UPDATE_STUDENT_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -69,10 +93,17 @@ class HomeActivity : AppCompatActivity() {
                 // Recharger la liste des étudiants
                 loadStudents()
             }
+        } else if (requestCode == UPDATE_STUDENT_REQUEST_CODE && resultCode == RESULT_OK) {
+            val isStudentUpdated = data?.getBooleanExtra("isStudentUpdated", false) ?: false
+            if (isStudentUpdated) {
+                // Recharger la liste des étudiants
+                loadStudents()
+            }
         }
     }
 
     companion object {
         const val ADD_STUDENT_REQUEST_CODE = 1002
+        const val UPDATE_STUDENT_REQUEST_CODE = 1003
     }
 }

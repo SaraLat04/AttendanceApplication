@@ -1,5 +1,9 @@
 package com.example.gestion_absences
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Student(
     val id: Int,
     val first_name: String,
@@ -7,4 +11,4 @@ data class Student(
     val email: String,
     val photo_url: String?,
     val class_id: Int
-)
+) : Parcelable

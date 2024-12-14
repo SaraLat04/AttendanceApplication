@@ -28,6 +28,8 @@
         <!-- Déclaration de HomeActivity -->
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".AddStudentActivity"></activity>
+        <activity android:name=".AdminsActivity"></activity>
+
     </application>
 
 </manifest>

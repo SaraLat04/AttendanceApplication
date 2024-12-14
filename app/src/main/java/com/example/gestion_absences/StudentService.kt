@@ -21,12 +21,8 @@ interface StudentService {
     @GET("students/{id}")
     fun getStudentById(@Path("id") id: Int): Call<Student>
 
-    @PUT("students/{id}/class/{class_id}")
-    fun updateStudent(
-        @Path("id") studentId: Int,
-        @Path("class_id") classId: Int,
-        @Body student: Student
-    ): Call<Student>
+    @PUT("students/{id}")
+    fun updateStudent(@Path("id") id: Int, @Body student: Student): Call<Void>
 
 
 }
