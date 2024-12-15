@@ -13,12 +13,19 @@ class AdminsActivity : AppCompatActivity() {
         // Récupérez la vue de la carte "Add Students"
         val addStudentsCard: View = findViewById(R.id.addStudents)
 
-        // Ajoutez un écouteur de clic à la carte
+        // Ajoutez un écouteur de clic à la carte "Add Students"
         addStudentsCard.setOnClickListener {
-            // Redirigez vers HomeActivity
+            val intent = Intent(this, AddStudentActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Récupérez la vue de la carte "Students List"
+        val studentsListCard: View = findViewById(R.id.list_std)
+
+        // Ajoutez un écouteur de clic à la carte "Students List"
+        studentsListCard.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }
 }
-

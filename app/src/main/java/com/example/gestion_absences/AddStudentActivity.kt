@@ -18,7 +18,6 @@ class AddStudentActivity : AppCompatActivity() {
     private lateinit var firstNameInput: EditText
     private lateinit var lastNameInput: EditText
     private lateinit var emailInput: EditText
-    private lateinit var classIdInput: EditText
     private lateinit var submitButton: Button
     private lateinit var selectImageButton: Button
     private lateinit var studentImage: ImageView
@@ -35,7 +34,6 @@ class AddStudentActivity : AppCompatActivity() {
         firstNameInput = findViewById(R.id.firstName)
         lastNameInput = findViewById(R.id.lastName)
         emailInput = findViewById(R.id.email)
-        classIdInput = findViewById(R.id.classId)
         submitButton = findViewById(R.id.submitButton)
         selectImageButton = findViewById(R.id.selectImageButton)
         studentImage = findViewById(R.id.studentImage)
@@ -48,11 +46,7 @@ class AddStudentActivity : AppCompatActivity() {
 
         // Gestion du clic pour soumettre l'étudiant
         submitButton.setOnClickListener {
-            val classId = classIdInput.text.toString().toIntOrNull()
-            if (classId == null) {
-                Toast.makeText(this, "Veuillez entrer un identifiant de classe valide", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+
 
             // Convertir l'image en base64 ou en fichier (selon votre API)
             val student = Student(
@@ -60,8 +54,7 @@ class AddStudentActivity : AppCompatActivity() {
                 first_name = firstNameInput.text.toString(),
                 last_name = lastNameInput.text.toString(),
                 email = emailInput.text.toString(),
-                photo_url = selectedImageBitmap?.let { bitmapToBase64(it) }, // Utiliser la méthode pour convertir l'image en Base64
-                class_id = classId
+                photo_url = selectedImageBitmap?.let { bitmapToBase64(it) }
             )
 
             val service = ApiClient.getClient().create(StudentService::class.java)

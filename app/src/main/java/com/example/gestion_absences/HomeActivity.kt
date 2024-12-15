@@ -26,11 +26,11 @@ class HomeActivity : AppCompatActivity() {
         addButton = findViewById(R.id.addButton)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = StudentAdapter(students, { student ->
-            deleteStudent(student) // Supprimer l'étudiant
-        }, { student ->
-            navigateToUpdateStudent(student) // Naviguer pour mettre à jour l'étudiant
-        })
+        adapter = StudentAdapter(
+            students,
+            { student -> deleteStudent(student) },  // Suppression
+            { student -> navigateToUpdateStudent(student) } // Mise à jour
+        )
         recyclerView.adapter = adapter
 
         loadStudents()
@@ -57,14 +57,12 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    // Méthode pour supprimer un étudiant
     private fun deleteStudent(student: Student) {
         val service = ApiClient.getClient().create(StudentService::class.java)
         service.deleteStudent(student.id.toString()).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@HomeActivity, "Étudiant supprimé", Toast.LENGTH_SHORT).show()
-                    // Mettre à jour la liste des étudiants après suppression
                     students = students.filter { it.id != student.id }
                     adapter.updateStudents(students)
                 } else {
@@ -78,7 +76,6 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    // Méthode pour naviguer vers l'écran de mise à jour d'un étudiant
     private fun navigateToUpdateStudent(student: Student) {
         val intent = Intent(this, UpdateStudentActivity::class.java)
         intent.putExtra("student", student)
@@ -90,14 +87,18 @@ class HomeActivity : AppCompatActivity() {
         if (requestCode == ADD_STUDENT_REQUEST_CODE && resultCode == RESULT_OK) {
             val isStudentAdded = data?.getBooleanExtra("isStudentAdded", false) ?: false
             if (isStudentAdded) {
-                // Recharger la liste des étudiants
                 loadStudents()
             }
         } else if (requestCode == UPDATE_STUDENT_REQUEST_CODE && resultCode == RESULT_OK) {
             val isStudentUpdated = data?.getBooleanExtra("isStudentUpdated", false) ?: false
             if (isStudentUpdated) {
-                // Recharger la liste des étudiants
-                loadStudents()
+                val updatedStudent = data?.getParcelableExtra<Student>("updatedStudent")
+                updatedStudent?.let {
+                    students = students.map { student ->
+                        if (student.id == it.id) it else student
+                    }
+                    adapter.updateStudents(students)
+                }
             }
         }
     }

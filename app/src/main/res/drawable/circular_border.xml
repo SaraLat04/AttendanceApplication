@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/lavender"/> <!-- Couleur bleue pour le fond -->
+    <corners android:radius="40dp"/> <!-- Coin arrondi avec un rayon de 40dp pour rendre l'image circulaire -->
+    <stroke android:color="#0000FF" android:width="2dp"/> <!-- Bordure bleue -->
+</shape>

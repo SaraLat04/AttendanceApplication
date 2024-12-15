@@ -24,5 +24,6 @@ interface StudentService {
     @PUT("students/{id}")
     fun updateStudent(@Path("id") id: Int, @Body student: Student): Call<Void>
 
-
+    @POST("auth/login")
+    fun login(@Body userAuth: UserAuth): Call<AuthResponse>
 }

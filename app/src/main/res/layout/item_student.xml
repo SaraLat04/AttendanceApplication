@@ -1,66 +1,91 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:padding="12dp">
 
-    <!-- Image de l'étudiant -->
-    <ImageView
-        android:id="@+id/studentImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
-        android:src="@android:drawable/ic_menu_gallery"
-        android:scaleType="centerCrop"
-        android:contentDescription="Image de l'étudiant" />
-
-    <!-- Informations sur l'étudiant -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/firstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Prénom"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        <!-- Image de l'étudiant -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/studentImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:contentDescription="Image de l'étudiant"
+            app:civ_border_color="@color/lavender"
+            app:civ_border_width="2dp"
+            android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/lastName"
-            android:layout_width="match_parent"
+        <!-- Informations sur l'étudiant -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nom"
-            android:textSize="14sp" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="E-mail"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            <!-- Prénom et Nom sur la même ligne -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/firstName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prénom"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp" /> <!-- Marges pour espacement entre prénom et nom -->
+
+                <TextView
+                    android:id="@+id/lastName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nom"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- E-mail -->
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E-mail"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <!-- Bouton de suppression -->
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Supprimer l'étudiant" />
+
+        <!-- Bouton d'édition -->
+        <ImageButton
+            android:id="@+id/updateButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_edit"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Mettre à jour l'étudiant" />
     </LinearLayout>
-
-    <!-- Bouton de suppression -->
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@android:drawable/ic_delete"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Supprimer l'étudiant" />
-
-    <!-- Bouton d'édition -->
-    <ImageButton
-        android:id="@+id/updateButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@android:drawable/ic_menu_edit"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Mettre à jour l'étudiant" />
-</LinearLayout>
+</androidx.cardview.widget.CardView>

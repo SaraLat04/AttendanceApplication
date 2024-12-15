@@ -8,8 +8,10 @@ object ApiClient {
 
     private var retrofit: Retrofit? = null
 
-    fun getClient(): Retrofit {
-        if (retrofit == null) {
+    @JvmStatic
+    fun getClient(): Retrofit{
+
+    if (retrofit == null) {
             retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -18,3 +20,4 @@ object ApiClient {
         return retrofit!!
     }
 }
+
