@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#87CEEB">
+
+    <!-- Toolbar (entête élégante) -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/lavender"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_gravity="top"
+        android:gravity="center_vertical|start">
+
+        <!-- Icône à gauche du titre -->
+        <ImageView
+            android:id="@+id/toolbar_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_list"
+            android:contentDescription="Icône liste"
+            />
+
+        <!-- Titre centré dans la toolbar -->
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Liste des étudiants"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- RecyclerView pour afficher la liste des étudiants -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <!-- Bouton rond pour ajouter un étudiant -->
+    <Button
+        android:id="@+id/addButton"
+        android:text="+"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        android:contentDescription="Ajouter un étudiant"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#1848a0" />
+
+</LinearLayout>

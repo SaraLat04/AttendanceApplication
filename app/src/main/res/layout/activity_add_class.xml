@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <!-- Nom de la classe -->
+    <EditText
+        android:id="@+id/edit_text_class_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom de la classe"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Spinner pour l'enseignant -->
+    <Spinner
+        android:id="@+id/spinner_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"/>
+
+    <!-- Date de la séance -->
+    <EditText
+        android:id="@+id/edit_text_class_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date de la séance (jj/mm/aaaa)"
+        android:layout_marginBottom="16dp"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <!-- Bouton Ajouter -->
+    <Button
+        android:id="@+id/button_add_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter la classe"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

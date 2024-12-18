@@ -25,14 +25,21 @@
             </intent-filter>
         </activity>
 
-        <!-- Déclaration de HomeActivity -->
+        <!-- Déclaration des activités existantes -->
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".AddStudentActivity"></activity>
         <activity android:name=".AdminsActivity"></activity>
         <activity android:name=".UpdateStudentActivity" />
         <activity android:name=".StudentDetailsActivity"></activity>
+        <activity android:name=".UserActivity"></activity>
+        <activity android:name=".AddUserActivity"></activity>
+        <activity android:name=".EditUserActivity"></activity>
 
-
+        <!-- Déclaration de ClasseActivity -->
+        <activity android:name=".ClasseActivity"></activity>
+        <activity android:name=".AddClasseActivity"></activity>
+        <activity android:name=".TeacherActivity"></activity>
+        <activity android:name=".StudentClassActivity"></activity>
     </application>
 
 </manifest>
