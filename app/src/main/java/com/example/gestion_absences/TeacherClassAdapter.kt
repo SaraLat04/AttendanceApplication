@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 class TeacherClassAdapter(
     private val classes: List<Classe>
 ) : RecyclerView.Adapter<TeacherClassAdapter.ViewHolder>() {
@@ -27,7 +30,18 @@ class TeacherClassAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val classe = classes[position]
         holder.className.text = classe.nom
-        holder.classDate.text = classe.date
+
+        // Formater la date
+        val dateString = classe.date  // Supposons que 'classe.date' est une chaîne au format ISO 8601 (par exemple "2024-12-19")
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Format d'entrée de la date
+        val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale.FRENCH) // Format de sortie "19 décembre 2024"
+
+        try {
+            val date = inputFormat.parse(dateString) // Convertir la chaîne en objet Date
+            holder.classDate.text = if (date != null) outputFormat.format(date) else "Date invalide"
+        } catch (e: Exception) {
+            holder.classDate.text = "Date invalide"
+        }
 
         // Redirection vers StudentClassActivity
         holder.itemView.setOnClickListener {

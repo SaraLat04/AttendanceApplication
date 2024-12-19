@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                     if ("admin".equals(role)) {
                         intent = new Intent(LoginActivity.this, AdminsActivity.class);
                     } else if ("teacher".equals(role)) {
-                        intent = new Intent(LoginActivity.this, TeacherActivity.class);
+                        intent = new Intent(LoginActivity.this, TeacherHomeActivity.class);
                         intent.putExtra("USER_ID", userId); // Passez l'ID utilisateur
                     } else {
                         intent = new Intent(LoginActivity.this, HomeActivity.class);

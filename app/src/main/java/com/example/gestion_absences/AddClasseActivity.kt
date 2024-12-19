@@ -100,6 +100,7 @@ class AddClasseActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
+                // Format de la date : JJ/MM/AAAA
                 val dateString = "${selectedDay}/${selectedMonth + 1}/$selectedYear"
                 classDateInput.setText(dateString)
             },
@@ -110,9 +111,9 @@ class AddClasseActivity : AppCompatActivity() {
 
     private fun addNewClass() {
         val className = classNameInput.text.toString()
-        val date = "2024-12-16" // Exemple, peut être pris depuis `classDateInput.text`
+        val date = classDateInput.text.toString()
 
-        if (className.isEmpty() || selectedTeacherId == null) {
+        if (className.isEmpty() || selectedTeacherId == null || date.isEmpty()) {
             Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
             return
         }
@@ -140,4 +141,3 @@ class AddClasseActivity : AppCompatActivity() {
         })
     }
 }
-

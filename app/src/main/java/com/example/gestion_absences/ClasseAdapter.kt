@@ -6,7 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ClasseAdapter(private val classes: List<Classe>, private val teachers: List<User>) : RecyclerView.Adapter<ClasseAdapter.ClasseViewHolder>() {
+class ClasseAdapter(private val classes: MutableList<Classe>, private val teachers: List<User>) : RecyclerView.Adapter<ClasseAdapter.ClasseViewHolder>() {
+
+    // Permet de mettre à jour la liste des classes dans l'adaptateur
+    fun updateClasses(newClasses: List<Classe>) {
+        classes.clear() // Efface les anciennes données
+        classes.addAll(newClasses) // Ajoute les nouvelles classes
+        notifyDataSetChanged() // Notifie l'adaptateur que les données ont changé
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClasseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_class, parent, false)

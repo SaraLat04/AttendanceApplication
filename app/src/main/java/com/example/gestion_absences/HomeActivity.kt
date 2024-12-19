@@ -45,14 +45,16 @@ class HomeActivity : AppCompatActivity() {
         val service = ApiClient.getClient().create(StudentService::class.java)
         service.getStudents().enqueue(object : Callback<List<Student>> {
             override fun onResponse(call: Call<List<Student>>, response: Response<List<Student>>) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful && response.body() != null) {
                     students = response.body() ?: listOf()
                     adapter.updateStudents(students)
+                } else {
+                    Toast.makeText(this@HomeActivity, "Erreur de chargement des étudiants", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<Student>>, t: Throwable) {
-                Toast.makeText(this@HomeActivity, "Erreur de chargement", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, "Erreur de connexion", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -81,6 +83,7 @@ class HomeActivity : AppCompatActivity() {
         intent.putExtra("student", student)
         startActivityForResult(intent, UPDATE_STUDENT_REQUEST_CODE)
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

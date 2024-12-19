@@ -29,7 +29,7 @@
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".AddStudentActivity"></activity>
         <activity android:name=".AdminsActivity"></activity>
-        <activity android:name=".UpdateStudentActivity" />
+        <activity android:name=".UpdateStudentActivity"></activity>
         <activity android:name=".StudentDetailsActivity"></activity>
         <activity android:name=".UserActivity"></activity>
         <activity android:name=".AddUserActivity"></activity>
@@ -40,6 +40,7 @@
         <activity android:name=".AddClasseActivity"></activity>
         <activity android:name=".TeacherActivity"></activity>
         <activity android:name=".StudentClassActivity"></activity>
+        <activity android:name=".TeacherHomeActivity"></activity>
     </application>
 
 </manifest>

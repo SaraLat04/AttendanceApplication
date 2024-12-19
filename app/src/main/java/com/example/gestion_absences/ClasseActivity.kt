@@ -16,6 +16,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 class ClasseActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
@@ -55,10 +58,11 @@ class ClasseActivity : AppCompatActivity() {
             val newClass = data?.getParcelableExtra<Classe>("new_class")
             newClass?.let {
                 classList.add(0, it) // Ajoutez la nouvelle classe en haut de la liste
-                classAdapter.notifyItemInserted(0) // Avertir l'adaptateur que l'élément a été inséré
+                classAdapter.updateClasses(classList) // Mettez à jour l'adaptateur avec la nouvelle classe
             }
         }
     }
+
 
 
     private fun fetchClasses() {
@@ -71,6 +75,10 @@ class ClasseActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                             if (response.isSuccessful) {
                                 val teachers = response.body() ?: emptyList()
+                                // Formater la date dans le format "19 Décembre 2024"
+                                for (classe in classList) {
+                                    classe.date = formatDate(classe.date)
+                                }
                                 // Initialiser l'adaptateur avec les classes et les enseignants
                                 classAdapter = ClasseAdapter(classList, teachers)
                                 recyclerView.adapter = classAdapter
@@ -94,4 +102,16 @@ class ClasseActivity : AppCompatActivity() {
         })
     }
 
+    // Méthode pour formater la date en "19 Décembre 2024"
+    private fun formatDate(dateString: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Format d'entrée (ex: "2024-12-19")
+        val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale.FRENCH) // Format de sortie (ex: "19 Décembre 2024")
+
+        return try {
+            val date = inputFormat.parse(dateString)
+            outputFormat.format(date!!)
+        } catch (e: Exception) {
+            dateString // Si la conversion échoue, retourner la date originale
+        }
+    }
 }

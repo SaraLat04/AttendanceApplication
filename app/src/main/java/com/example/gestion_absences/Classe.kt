@@ -7,5 +7,5 @@ data class Classe(
     val id: Int,
     val nom: String,
     val id_teacher: Int,
-    val date: String
+    var date: String
 ) : Parcelable

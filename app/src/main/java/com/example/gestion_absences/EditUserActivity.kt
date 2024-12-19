@@ -29,7 +29,14 @@ class EditUserActivity : AppCompatActivity() {
         populateFields(user)
 
         submitButton.setOnClickListener {
-            updateUser()
+            // Avant de soumettre, vérifier que l'utilisateur est toujours connecté
+            if (isUserAuthenticated()) {
+                updateUser()
+            } else {
+                // Si l'utilisateur n'est pas authentifié, rediriger vers la page de connexion
+                Toast.makeText(this, "Session expirée, veuillez vous reconnecter", Toast.LENGTH_SHORT).show()
+                redirectToLogin()
+            }
         }
     }
 
@@ -66,5 +73,19 @@ class EditUserActivity : AppCompatActivity() {
                 Toast.makeText(this@EditUserActivity, "Erreur de connexion", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun isUserAuthenticated(): Boolean {
+        // Implémenter la logique pour vérifier si l'utilisateur est authentifié
+        // Par exemple, vérifier si un token de session existe ou si un utilisateur est connecté.
+        val token = getSharedPreferences("app_prefs", MODE_PRIVATE).getString("auth_token", null)
+        return token != null
+    }
+
+    private fun redirectToLogin() {
+        // Rediriger l'utilisateur vers l'écran de connexion
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()  // Fermer l'activité actuelle
     }
 }

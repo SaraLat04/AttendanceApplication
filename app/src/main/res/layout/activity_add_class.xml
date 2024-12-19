@@ -1,42 +1,92 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_vertical">
+    android:background="#669CED">
 
-    <!-- Nom de la classe -->
-    <EditText
-        android:id="@+id/edit_text_class_name"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom de la classe"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
 
-    <!-- Spinner pour l'enseignant -->
-    <Spinner
-        android:id="@+id/spinner_teacher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:spinnerMode="dropdown"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="20dp"
+            android:background="@drawable/lavender_border">
 
-    <!-- Date de la séance -->
-    <EditText
-        android:id="@+id/edit_text_class_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Date de la séance (jj/mm/aaaa)"
-        android:layout_marginBottom="16dp"
-        android:focusable="false"
-        android:clickable="true"/>
+            <!-- Titre -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter une classe"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:textColor="@color/lavender"
+                android:layout_marginBottom="20dp"/>
 
-    <!-- Bouton Ajouter -->
-    <Button
-        android:id="@+id/button_add_class"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ajouter la classe"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+            <!-- Nom de la classe -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/edit_text_class_name"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:hint="Nom de la classe"
+                android:textColor="@color/lavender"
+                android:gravity="start|center_vertical"/>
+
+            <!-- Spinner pour l'enseignant -->
+            <Spinner
+                android:id="@+id/spinner_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/spinner_background"
+                android:padding="16dp"
+                android:textColor="@color/lavender"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Date de la séance -->
+            <EditText
+                android:id="@+id/edit_text_class_date"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:hint="Date de la séance (jj/mm/aaaa)"
+                android:textColor="@color/lavender"
+                android:gravity="start|center_vertical"
+                android:focusable="false"
+                android:clickable="true"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Bouton Ajouter -->
+            <Button
+                android:id="@+id/button_add_class"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Ajouter la classe"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/lavender"
+                android:layout_marginTop="20dp"
+                app:cornerRadius="20dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>

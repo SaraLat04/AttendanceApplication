@@ -1,34 +1,62 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:padding="12dp">
 
-    <!-- Affichage du nom de la classe -->
-    <TextView
-        android:id="@+id/class_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nom de la classe"
-        android:textSize="18sp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
 
-    <!-- Affichage du nom de l'enseignant -->
-    <TextView
-        android:id="@+id/teacher_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nom de l'enseignant"
-        android:textSize="16sp"
-        android:textColor="#555555"/>
+        <!-- Informations sur la classe -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
 
-    <!-- Affichage de la date -->
-    <TextView
-        android:id="@+id/class_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textSize="16sp"
-        android:textColor="#555555"/>
+            <!-- Nom de la classe -->
+            <TextView
+                android:id="@+id/class_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom de la classe"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+            android:layout_marginEnd="8dp" />
 
-</LinearLayout>
+            <!-- Nom de l'enseignant -->
+            <TextView
+                android:id="@+id/teacher_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nom de l'enseignant"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="center"
+            android:layout_marginEnd="8dp" />
+
+            <!-- Date de la classe -->
+            <TextView
+                android:id="@+id/class_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date de la classe"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="center"
+            android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

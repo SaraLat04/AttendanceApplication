@@ -48,6 +48,7 @@
         android:layout_weight="1"
         android:scrollbars="vertical" />
 
+
     <!-- Bouton rond pour ajouter un étudiant -->
     <Button
         android:id="@+id/addButton"

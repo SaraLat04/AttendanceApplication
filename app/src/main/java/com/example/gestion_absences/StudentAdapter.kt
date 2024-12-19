@@ -38,36 +38,35 @@ class StudentAdapter(
         holder.lastName.text = student.last_name
         holder.email.text = student.email
 
-        // Vérifiez si `photo_url` est une URL ou un contenu Base64
         val photoUrl = student.photo_url
         if (photoUrl != null) {
             if (photoUrl.startsWith("http")) {
-                // Chargement via URL avec Glide
+                // Charger l'image via URL avec Glide
                 Glide.with(holder.itemView.context)
                     .load(photoUrl)
                     .placeholder(R.drawable.ic_placeholder)
                     .into(holder.studentImage)
             } else {
-                // Décodage Base64
+                // Décoder le Base64 si c'est une chaîne Base64
                 try {
                     val decodedString = android.util.Base64.decode(photoUrl, android.util.Base64.DEFAULT)
                     val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
                     holder.studentImage.setImageBitmap(decodedByte)
                 } catch (e: IllegalArgumentException) {
-                    // Si Base64 échoue, on utilise le placeholder
+                    // Si le Base64 échoue, on affiche le placeholder
                     holder.studentImage.setImageResource(R.drawable.ic_placeholder)
                 }
             }
         } else {
-            // Si aucune image n'est disponible, utilisez le placeholder
+            // Utilisation d'un placeholder si l'URL est null
             holder.studentImage.setImageResource(R.drawable.ic_placeholder)
         }
 
-        // Boutons de suppression et de mise à jour
+        // Boutons pour supprimer ou mettre à jour l'étudiant
         holder.deleteButton.setOnClickListener { onDeleteClick(student) }
         holder.updateButton.setOnClickListener { onUpdateClick(student) }
 
-        // Détails sur clic de l'élément
+        // Détails de l'étudiant au clic
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, StudentDetailsActivity::class.java)
             intent.putExtra("student", student)
@@ -75,9 +74,9 @@ class StudentAdapter(
         }
     }
 
-
     override fun getItemCount(): Int = students.size
 
+    // Fonction pour mettre à jour la liste des étudiants
     fun updateStudents(newStudents: List<Student>) {
         students = newStudents
         notifyDataSetChanged()

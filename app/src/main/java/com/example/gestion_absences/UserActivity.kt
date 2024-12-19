@@ -1,3 +1,4 @@
+// UserActivity :
 package com.example.gestion_absences
 
 import android.content.Intent
@@ -40,6 +41,13 @@ class UserActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             val intent = Intent(this, AddUserActivity::class.java)
             startActivityForResult(intent, 100)
+        }
+
+        // Vérifier si un utilisateur a été passé via l'Intent
+        val newUser: User? = intent.getSerializableExtra("newUser") as? User
+        if (newUser != null) {
+            users.add(0, newUser)  // Ajouter le nouvel utilisateur au début de la liste
+            userAdapter.notifyItemInserted(0)  // Informer l'adaptateur de l'ajout
         }
 
         fetchUsers()

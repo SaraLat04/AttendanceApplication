@@ -1,3 +1,4 @@
+// AddUserActivity :
 package com.example.gestion_absences
 
 import android.content.Intent
@@ -64,8 +65,12 @@ class AddUserActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@AddUserActivity, "Utilisateur ajouté avec succès", Toast.LENGTH_SHORT).show()
-                        setResult(RESULT_OK, Intent().putExtra("isUserAdded", true))
-                        finish()
+
+                        // Redirection vers UserActivity après l'ajout de l'utilisateur
+                        val intent = Intent(this@AddUserActivity, UserActivity::class.java)
+                        intent.putExtra("newUser", response.body()) // Passer l'utilisateur ajouté
+                        startActivity(intent)
+                        finish() // Fermer l'activité actuelle
                     } else {
                         Toast.makeText(this@AddUserActivity, "Erreur : ${response.code()}", Toast.LENGTH_SHORT).show()
                     }
@@ -76,7 +81,5 @@ class AddUserActivity : AppCompatActivity() {
                 }
             })
         }
-
-
     }
 }
